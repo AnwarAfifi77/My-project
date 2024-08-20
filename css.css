@@ -1,0 +1,613 @@
+:root{
+    --primary-color:#ff4757;
+    --primary-04-color:#ff475766;
+    --white-color:#ffffff;
+    --pure-white:#ffffff;
+    --grey-color:#747d8c;
+    --light-color:#f1f2f6;
+    --dark-color:#2f3542;
+    --dark-04-color:#2f354266;
+
+    --csspercent: 95;
+    --jspercent: 90;
+    --vuepercent: 85;
+    --reactpercent: 80;
+    --flutterpercent: 89;
+
+    --csscolor:#00a0e4;
+    --jscolor:#F7971E;
+    --reactcolor:#61DBFB;
+    --vuecolor:#00BC9B;
+    --fluttercolor:#54C5F8;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+*, ::before, ::after{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--dark-color);
+    background-color: var(--white-color);
+}
+html{
+    scroll-behavior: smooth;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+img{
+    max-width: 100%;
+    vertical-align: middle;
+}
+strong{
+    font-weight: 800;
+}
+ul{
+    list-style: none;
+}
+h1,h2,h3,h4{
+    font-weight: 800;
+    line-height: normal;
+}
+h1 {font-size: 2.5em;}
+h2 {font-size: 2em;} 
+h3 {font-size: 1.5em;} 
+h4 {font-size: 1em;} 
+
+
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: var(--white-color);
+    border-right:1px solid var(--light-color);
+    padding: 30 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+
+    z-index: 1001;
+    width: 60px;
+    transform: translateX(-60px);
+    transition: transform .3s .1s;
+}
+header a{
+    font-size: 20px;
+    width: 40px;
+    height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header .logo a{
+    background-color: var(--primary-color);
+    color: var(--pure-white);
+    font-size: 30px;
+    border-radius: 50%;
+}
+.has-hover a{
+    position: relative;
+}
+.has-hover a::before{
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary-color);
+    box-shadow:0 0 0 10px var(--primary-04-color);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.menu-visible header{
+    transform: translateX(0);
+    transition-delay:.2s ;
+}
+.has-hover a:hover::before{
+    opacity: 1;
+    animation: blinkprimary 1s inherit;
+}
+@keyframes blinkprimary{
+    50%{
+        box-shadow:0 0 0 0 var(--primary-04-color);
+    }
+}
+header .socials a:hover{
+    color: var(--white-color);
+}
+.site > .wrapper{
+    padding-left: 80px;
+}
+.container{
+    padding:0 64px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+main nav{
+    height: 100px;
+}
+main nav :where(.container, ul) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: inherit;
+}
+main nav ul{
+    gap: 46px;
+}
+main nav .menu a{
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-color);
+    transition: color 0.3s;
+}
+main nav .menu a:hover{
+    color: var(--dark-color);
+}
+main nav .daynight input{
+    position: absolute;
+    height: 0;
+}
+main nav .daynight label{
+    display: flex;
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    box-shadow: 0 0 0 4px var(--dark-04-color);
+    cursor: pointer;
+}
+main nav :where(.menu-trigger, .daynight label){
+    font-size: 24px;
+    color: var(--dark-color);
+    width: 45px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color .3s color .3s box-shadow .3s;
+}
+main nav :is(.menu-trigger, .daynight label):hover{
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    box-shadow: 0 0 0 4px var(--primary-04-color);
+    animation: blinkdark 1s  infinite;
+}
+@keyframes blinkdark {
+    50% {
+        box-shadow: 0 0 0 0 var(--dark-04-color);
+    }
+}
+main nav .daynight label .light,
+main nav .daynight input:checked ~ label .dark{
+    display: none;
+}
+main nav .daynight input:checked ~ label .light{
+    display: block;
+}
+main nav .menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+    background-color: var(--primary-color);
+    font-size: 24px;
+    padding-left: 60px;
+    transform: translateX(-100%);
+    transition: transform .3s .1s;
+}
+main nav .menu.show{
+    transform: translateX(0);
+}
+main nav .menu ul{
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+
+}
+
+
+
+.hero{
+    position: relative;
+    overflow: hidden;
+}
+.hero .container{
+    position: relative;
+    min-height: calc(100vh - 100px);
+}
+.hero .wrapper .image{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateX(50%);
+}
+.hero .wrapper .image img{
+    max-width:600px;
+}
+.hero .text{
+    width: fit-content;
+    padding-top: 10%;
+    min-height: 850px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.hero .text > *{
+    padding-right: 30%;
+}
+.hero .text-top h1 span{
+    font-size: 32px;
+    font-weight: 600;
+}
+.hero .text-top h1 strong{
+    font-size: clamp(40px, 505vw, 2.5em);
+    font-weight: 800;
+}
+.hero .text-top p,
+.hero .text-bottom ul li a{
+    color: var(--grey-color);
+}
+.button{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 50px;
+    padding: 0 36px;
+    margin-top: 46px;
+    font-weight: 14px;
+    background-color: var(--primary-color);
+    color: var(--pure-white);
+    border-radius: 25px;
+    box-shadow: 0 0 0 4px var(--primary-04-color);
+}
+.button:hover{
+    animation: blinkprimary 1s infinite;
+}
+.hero .text-bottom ul{
+    padding: 0 0 30px 30px;
+}
+.hero .text-bottom ul li{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+.hero .text-bottom ul li a{
+    position: relative;
+}
+.hero .text-bottom ul li a::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: -22px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--grey-color);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+.hero .text-bottom ul li a:hover::before{
+    background-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-04-color);
+    animation: blinkprimary 0.5s infinite;
+}
+
+
+
+
+
+
+.service{
+    background-color: var(--light-color);
+}
+main > div:not(.hero) {
+    padding: 100px 0;
+    overflow: hidden;
+}
+main > div .head{
+    margin-bottom: 60px;
+}
+main > div .head h2{
+    font-size: clamp(36px, 4.5vw, 3em);
+}
+main .container.center{
+    text-align: center;
+}
+main .wrapper.center .head p{
+    margin: 16px auto 0;
+}
+main .wrapper .head p{
+    max-width: 400px;
+    color: var(--grey-color);
+    margin-top: 16px;
+}
+main > div:not(.hero) ul{
+    display: grid;
+    gap: 46px;
+}
+.service ul{
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.service ul li{
+    position: relative;
+    padding: 48px 32px 32px;
+    margin-top: 32px;
+    background-color: var(--white-color);
+    border-radius: 20px;
+    transition: .3s;
+}
+.service ul li:hover{
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    box-shadow: rgb(0, 0, 0 / 30%) 0 30px 60px -10px;
+}
+.service ul li i{
+    position:absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--dark-04-color),
+                0 0 0 15px var(--light-color);
+}
+.service ul li h3{
+    font-size: 18px;
+    margin: 16px;
+}
+.service ul li p{
+    font-size: 14px;
+    color: var(--grey-color);
+    transition: color .3s;
+}
+.service ul li:hover p{
+    color: var(--dark-color);
+}
+.skills ul{
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    max-width: 950px;
+    margin: auto;
+}
+.skills li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.skills li :where(.circle, svg){
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    z-index: 10;
+}
+.skills li svg circle{
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 470;
+}
+.skills li svg{
+    transform: rotate(270deg);
+}
+.skills li.css svg circle{
+    stroke-dashoffset: calc(440 - (400 * var(--csspercent)) / 100);
+}
+
+.skills li.js svg circle{
+    stroke-dashoffset: calc(440 - (400 * var(--jspercent)) / 100);
+}
+
+.skills li.react svg circle{
+    stroke-dashoffset: calc(440 - (400 * var(--reactpercent)) / 100);
+}
+
+.skills li.flutter svg circle{
+    stroke-dashoffset: calc(440 - (400 * var(--flutterpercent)) / 100);
+}
+
+.skills li.vue svg circle{
+    stroke-dashoffset: calc(440 - (400 * var(--vuepercent)) / 100);
+}
+.skills li .circle .inside{
+    position: absolute;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    top: 20px;
+    left: 20px;
+    background-color: var(--light-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.skills li .circle .inside::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--light-color);
+    border-radius: 50%;
+    transform: scale(1.28);
+    z-index: -1;
+}
+.skills li .circle .inside span{
+    font-size: 24px;
+    color: var(--grey-color);
+    position: absolute;
+    left: 40px;
+}
+.skills li .circle .dot{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.skills li .circle .dot::before{
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.skills li.css .circle .dot{
+    transform: rotate(calc(3.6deg * var(--csspercent)));
+}
+
+.skills li.js .circle .dot{
+    transform: rotate(calc(3.6deg * var(--jspercent)));
+}
+
+.skills li.react .circle .dot{
+    transform: rotate(calc(3.6deg * var(--reactpercent)));
+}
+
+.skills li.flutter .circle .dot{
+    transform: rotate(calc(3.6deg * var(--flutterpercent)));
+}
+
+.skills li.vue .circle .dot{
+    transform: rotate(calc(3.6deg * var(--vuepercent)));
+}
+
+
+.skills li.css .circle .dot::before{
+    background-color: var(--csscolor);
+    box-shadow: 0 0 10px var(--csscolor);
+}
+
+.skills li.js .circle .dot::before{
+    background-color: var(--jscolor);
+    box-shadow: 0 0 10px var(--jscolor);
+}
+
+.skills li.react .circle .dot::before{
+    background-color: var(--reactcolor);
+    box-shadow: 0 0 10px var(--reactcolor);
+}
+
+.skills li.flutter .circle .dot::before{
+    background-color: var(--fluttercolor);
+    box-shadow: 0 0 10px var(--fluttercolor);
+}
+
+.skills li.vue .circle .dot::before{
+    background-color: var(--vuecolor);
+    box-shadow: 0 0 10px var(--vuecolor);
+}
+.skills li h4{
+    font-weight: 600;
+    color: var(--grey-color);
+}
+
+
+
+
+.lastest-work ul{
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    flex-wrap: wrap;
+}
+:where(.lastest-work, .portfolio) ul li .thumbmail{
+    height: 200px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+:where(.lastest-work, .portfolio) ul li .thumbmail img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform .3s;
+}
+.lastest-work ul li:hover .thumbmail img{
+    transform: scale(1.1);
+}
+.lastest-work ul li h3{
+    font-weight: 600;
+    font-size: 16px;
+    margin: 16px 0 0 16px;
+    color: var(--grey-color);
+}
+
+
+
+
+
+
+
+
+@media screen and (min-width: 768px) {
+    header{
+        width: 80px;
+    }
+    .site > .wrapper{
+        padding-left: 80px;
+    }
+    .container{
+        padding: 0 64px;
+    }
+    .mobile-only{
+        display: none;
+    }
+    header, main nav .menu{
+        transform: none;
+    }
+    main nav .menu{
+        position: relative;
+        padding: 0;
+        width: 100%;
+        background: transparent;
+        font-size: inherit;
+    }
+    main nav .menu ul{
+        flex-direction: row;
+        justify-content: unset;
+        gap: 46px;
+    }
+    main nav .menu ul li a{
+        color: inherit;
+        font-weight: 600;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+    .hero .wrapper .image{
+        transform: none;
+    }
+    .hero .wrapper .image{
+        transform: none;
+    }
+    .hero .text > *{
+        padding:0;
+    }
+}
